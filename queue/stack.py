@@ -1,22 +1,17 @@
 """
-A queue is a data structure whose primary purpose is to store and
-return elements in First In First Out order. 
+A stack is a data structure whose primary purpose is to store and
+return elements in Last In First Out order. 
 
-1. Implement the Queue class using an array as the underlying storage structure.
-   Make sure the Queue tests pass.
-2. Re-implement the Queue class, this time using the linked list implementation
+1. Implement the Stack class using an array as the underlying storage structure.
+   Make sure the Stack tests pass.
+2. Re-implement the Stack class, this time using the linked list implementation
    as the underlying storage structure.
-   Make sure the Queue tests pass.
+   Make sure the Stack tests pass.
 3. What is the difference between using an array vs. a linked list when 
-   implementing a Queue?
-   
-Stretch: What if you could only use instances of your Stack class to implement the Queue?
-         What would that look like? How many Stacks would you need? Try it!
+   implementing a Stack?
 """
 """
-from collections import deque
-
-class Queue:
+class Stack:
     def __init__(self):
         self.size = 0
         self.storage = []
@@ -24,24 +19,24 @@ class Queue:
     def __len__(self):
         return self.size 
 
-    def enqueue(self, value):
+    def push(self, value):
         self.storage.append(value)
         self.size = len(self.storage)
 
-    def dequeue(self):
+    def pop(self):
         if self.size == 0:
             return None
         else:
-            removed = self.storage.pop(0)
+            removed = self.storage.pop()
             self.size = len(self.storage)
             return removed 
 """
 
-
 from singly_linked_list import LinkedList 
 from singly_linked_list import Node
 
-class Queue:
+
+class Stack:
     def __init__(self):
         self.size = 0
         self.storage = LinkedList()
@@ -49,17 +44,20 @@ class Queue:
     def __len__(self):
         return self.size
 
-    def enqueue(self, value):
+    def push(self, value):
         # set a new node that has the input value
         self.size +=1
         self.storage.add_to_tail(value)
 
-    def dequeue(self):
+    def pop(self):
         if self.size == 0:
             return None
         else:
-            result = self.storage.remove_head()
+            result = self.storage.remove_tail()
             self.size -=1
             return result 
-             
+        
+        
+       
+        
 
