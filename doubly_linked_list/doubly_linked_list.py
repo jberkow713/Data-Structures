@@ -147,6 +147,13 @@ class DoublyLinkedList:
         # use the delete function to delete this
         # node, and then use the add to head function
         # to move this to the head
+        # you are moving the nodes value, 
+        # and not the node itself, because
+        # add to head has a value attribute in its
+        #method, and not a node value, so you are
+        # sort of transferring the essence from the
+        #node attribute in this method, to the 
+        # add to head attribute
         moved_value = node.value
         self.delete(node)
         self.add_to_head(moved_value)
@@ -170,6 +177,10 @@ class DoublyLinkedList:
         #use the delete function to delete the nodes value
         # then combine it with the add to tail 
         # function to add it to the end of the chain
+        #same thing , getting a value , deleting the node
+        # using delete function which has node attribute,
+        # moving to tail , through add to tail, which has
+        # value attribute, node --->> value
         end_value = node.value
         self.delete(node)
         self.add_to_tail(end_value)
