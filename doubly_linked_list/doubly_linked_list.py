@@ -17,7 +17,7 @@ class DoublyLinkedList:
         self.head = node
         self.tail = node
         self.length = 1 if node is not None else 0
-
+    # self.length =1 if node exists, otherwise 0
     def __len__(self):
         return self.length    
         
@@ -34,14 +34,22 @@ class DoublyLinkedList:
     def add_to_head(self, value):
         new_node =ListNode(value)
         self.length +=1   
-
+        #Again, you are adding length regardless
+        # of where the procedure takes place, 
+        # so the length function takes place
+        # outside the if, else statement
         if self.head is None and self.tail is None:
 
             self.head = new_node
             self.tail = new_node
 
         else:
-               
+            # setting the newly created nodes next
+            # value to the previous head, 
+            # setting the previous heads previous value 
+            # to the new node, thus creating 2
+            # new reference points to the new node
+            # as the new head   
             new_node.next = self.head 
             self.head.prev = new_node
             self.head = new_node
@@ -55,7 +63,10 @@ class DoublyLinkedList:
     def remove_from_head(self):
         if self.head is None:
             return None 
-        
+        #set variable = to self.head.value...VALUE only
+        # use delete function created below to remove the
+        # specific node from the head of the Doubly Linked
+        # List, and then return the removed head VALUE
         
         removed_head = self.head.value
         self.delete(self.head)
@@ -72,6 +83,15 @@ class DoublyLinkedList:
     the old tail node's next pointer accordingly.
     """
     def add_to_tail(self, value):
+        #using listnode class to declare a new variable
+        # by doing so within the doubly linked list 
+        #class, you can use the attributes of the
+        # ListNode class
+
+        # add 1 outside the if else statement because you 
+        # are adding 1 to length regardless of which situation
+        # you add to the tail,
+        #for subtraction, it is different procedure
         tail_node =ListNode(value, None, None)
         self.length +=1
 
@@ -81,7 +101,11 @@ class DoublyLinkedList:
             self.tail = tail_node
 
         else:
-
+         # setting the new tail_nodes previous point
+         # equal to the previous tail, and 
+         # setting the old tails next point equal
+         # to the new tail node, thus creating 2
+         # new reference points to the new tail       
             tail_node.prev = self.tail 
             self.tail.next = tail_node
             self.tail = tail_node
@@ -99,7 +123,12 @@ class DoublyLinkedList:
         if self.tail is None:
             return None 
         
-        
+        # set variable = to tail value
+        # use the delete function you created below
+        # to delete the tail
+        # and then return the VALUE of removed tail, 
+        # ONLY the VALUE is being returned here, 
+        #REPRESENTED by removed_tail
         removed_tail = self.tail.value
         self.delete(self.tail)
         
@@ -115,6 +144,9 @@ class DoublyLinkedList:
     def move_to_front(self, node):
         if node is self.head:
             return 
+        # use the delete function to delete this
+        # node, and then use the add to head function
+        # to move this to the head
         moved_value = node.value
         self.delete(node)
         self.add_to_head(moved_value)
@@ -135,7 +167,9 @@ class DoublyLinkedList:
     def move_to_end(self, node):
         if node is self.tail:
             return
-        
+        #use the delete function to delete the nodes value
+        # then combine it with the add to tail 
+        # function to add it to the end of the chain
         end_value = node.value
         self.delete(node)
         self.add_to_tail(end_value)
@@ -151,23 +185,40 @@ class DoublyLinkedList:
         if self.head is None and self.tail is None:
             return
         # list is only one node: 
+        # if only one node, meaning tail = head, you 
+        # declare the one node equal to the head
+        # and the tail, set both = to None, and 
+        # delete the length by 1
         self.length -=1
         if self.head == self.tail:
             self.head = None
             self.tail = None 
 
         # node is the head node, handle head pointer correctly
-
+        # so here, you are pushing self head a step forward
+        # and then sending it back to where it was
+        # but declaring where it was as None, thereby
+        # essentially deleting the node itself
         elif self.head == node:
             self.head = self.head.next
             self.head.prev = None
             
 
-        # node is tail node, make sure tail handled correctly
+        # here you are declaring that the tail is equal
+        # to the previous node, and then sending the previous
+        # node back to where the tail was, and declaring it
+        # None, thereby deleting the tail
         elif self.tail == node:
             self.tail = self.tail.prev
             self.tail.next = None
-            
+        #Here you are severing the connection to the node
+        # from both directions, by saying the previous nodes
+        # next direction is equal to this nodes next,
+        # and by saying the next nodes previous direction
+        # is equal to this nodes previous, essentially
+        # pointing the node in front of the current node
+        # towards the node behind it, and pointing the node behind
+        # this node, to the node in front of it...trippy    
         else:
             node.prev.next = node.next
             node.next.prev = node.prev   
