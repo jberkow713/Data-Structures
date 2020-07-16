@@ -98,7 +98,7 @@ class BSTNode:
         # so this below is the function,
         # if at any point self.right returns None, then self.value
         # is the maximum value of previous node self
-        self is self.right
+        
         if self.right is None:
             return self.value
 
@@ -141,17 +141,62 @@ class BSTNode:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
     def in_order_print(self, node):
-        pass
+        # go to each node, print node
+
+            
+        # so defined the function above,
+        # called function on self.value
+
+        if self.left:
+            self.left.in_order_print(node) 
+        
+        print(self.value)
+        
+
+        if self.right:
+            self.right.in_order_print(node)
+
+        
+
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     def bft_print(self, node):
-        pass
+        from collections import deque
+        # BFT: FIFO 
+        # we'll use a queue to facilitate the ordering 
+        queue = deque()
+        queue.append(self)
+        
+        # continue to traverse so long as there are nodes in the queue
+        while len(queue) > 0:
+            current = queue.popleft()
+            
+            if current.left:
+                queue.append(current.left)
 
+            if current.right:
+                queue.append(current.right)
+                
+            print(current.value)       
+          
+   
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        stack = []
+        stack.append(node)
+
+        while len(stack)>0:
+            current = stack.pop()
+
+            if current.right:
+                stack.append(current.right)
+
+            if current.left:
+                stack.append(current.left)
+
+            print(current.value)   
 
     # Stretch Goals -------------------------
     # Note: Research may be required
